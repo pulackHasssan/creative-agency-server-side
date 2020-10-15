@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+const port = 2000;
 
 require('dotenv').config();
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.nfohl.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
@@ -50,4 +51,4 @@ client.connect(err => {
   })
 });
 
-app.listen(process.env.PORT || 1000);
+app.listen(process.env.PORT || port);
