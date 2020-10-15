@@ -12,9 +12,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.get('/', (req, res)=>{
-//     res.send('Welcome to Creative Agency Server Side')
-// })
+app.get('/', (req, res)=>{
+    res.send('Welcome to Creative Agency Server Side')
+})
 
 
 client.connect(err => {
