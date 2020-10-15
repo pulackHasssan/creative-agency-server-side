@@ -50,4 +50,4 @@ client.connect(err => {
   })
 });
 
-app.listen(1000);
+app.listen(process.env.PORT || 1000);
