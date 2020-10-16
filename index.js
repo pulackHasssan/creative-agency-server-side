@@ -38,6 +38,14 @@ client.connect(err => {
 //  app.delete('/delete/:id', (req, res)=>{
 
 //  })
+//for admin
+
+app.get('/orders', (req, res)=>{
+  orderCollection.find({})
+  .toArray((error, documents)=>{
+    res.send(documents)
+  })
+})
 
 
   app.post('/addReview', (req,res)=>{
