@@ -18,7 +18,7 @@ app.get('/', (req, res)=>{
 
 
 client.connect(err => {
-  const orderCollection = client.db("creative-agency").collection("customer-service-form");
+  const orderCollection = client.db("creative-agency").collection("customer-order");
   const reviewCollection = client.db("creative-agency").collection("customer-review");
   app.post('/addOrder', (req,res)=>{
     const order = req.body;
@@ -29,11 +29,16 @@ client.connect(err => {
   })
 
   app.get('/order', (req, res)=>{
-    orderCollection.find({})
+    orderCollection.find({email: req.query.email})
     .toArray((error, documents)=>{
       res.send(documents)
     })
   })
+
+//  app.delete('/delete/:id', (req, res)=>{
+
+//  })
+
 
   app.post('/addReview', (req,res)=>{
     const review = req.body;
