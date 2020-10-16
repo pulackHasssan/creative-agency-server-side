@@ -63,8 +63,9 @@ app.get('/orders', (req, res)=>{
 })
 
 app.post('/addAdmin', (req,res)=>{
-    const admin = req.body;
-    adminCollection.insertOne(admin)
+    const name = req.body.name;
+    const email = req.body.email;
+    adminCollection.insertOne({name, email})
     .then(result=>{
       res.send(result.insertedCount >0)
     })
