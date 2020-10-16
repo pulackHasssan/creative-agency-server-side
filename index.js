@@ -20,6 +20,7 @@ app.get('/', (req, res)=>{
 client.connect(err => {
   const orderCollection = client.db("creative-agency").collection("customer-order");
   const reviewCollection = client.db("creative-agency").collection("customer-review");
+  const adminCollection = client.db("creative-agency").collection("Admin");
   app.post('/addOrder', (req,res)=>{
     const order = req.body;
     orderCollection.insertOne(order)
@@ -35,17 +36,7 @@ client.connect(err => {
     })
   })
 
-//  app.delete('/delete/:id', (req, res)=>{
 
-//  })
-//for admin
-
-app.get('/orders', (req, res)=>{
-  orderCollection.find({})
-  .toArray((error, documents)=>{
-    res.send(documents)
-  })
-})
 
 
   app.post('/addReview', (req,res)=>{
@@ -62,6 +53,31 @@ app.get('/orders', (req, res)=>{
       res.send(documents)
     })
   })
+
+  //for admin
+app.get('/orders', (req, res)=>{
+  orderCollection.find({})
+  .toArray((error, documents)=>{
+    res.send(documents)
+  })
+})
+
+app.post('/addAdmin', (req,res)=>{
+    const name = req.body.name;
+    const email = req.body.email;
+    adminCollection.insertOne({name, email})
+    .then(result=>{
+      res.send(result.insertedCount >0)
+    })
+})
+
+app.get('/admin', (req,res)=>{
+  adminCollection.find({})
+  .toArray((err, documents)=>{
+    res.send(documents)
+  })
+})
+
 });
 
 app.listen(process.env.PORT || port);
